@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ product.name }}{% endblock %}
+{% load string_multiply %}
+{% load crispy_forms_tags %}
+{% block content2 %}
+
+
+<main role="main">
+
+
+  <div class="container mt-3">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{{ product.name }}</h2>
+        <img src={{product.img}} width="180">
+        <form method="post" action="./cart/">
+          <input type="hidden" name="csrfmiddlewaretoken"
+                 value="N4vcBqzjoYkU7OTDuAT8hq8srpvYX44nJsswuP7e3EYg0Hq8DgxuR0eiXWbSr5RZ">
+          <input type="hidden" name="merchandise_id" value="1">
+          <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
+        </form>
+      </div>
+    </div>
+    <hr>
+    <h4>Отзывы:</h4>
+        {% for review in reviews %}
+          {{ '★'|multiply:review.rate  }} <span>{{review.name}}: </span> <p>{{review.text}}</p>
+        {% endfor %}
+
+    <hr>
+    {% if is_review_exist %}
+        <p>Отзыв от вас уже есть</p>
+    {% else %}
+        <h4>Оставте отзыв:</h4>
+        <form action="{% url 'product_view' product.id %}" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Отправить отзыв"/>
+        </form>
+    {% endif %}
+
+  </div> <!-- /container -->
+
+
+</main>
+
+<script src="{% static "jquery-3.3.1.slim.min.js" %}"></script>
+<script src="{% static "popper.min.js" %}"></script>
+<script src="{% static "bootstrap.min.js" %}"></script>
+
+{% endblock content2 %}

@@ -1,0 +1,38 @@
+[
+  {
+    "model": "phones.product",
+    "pk": 1,
+    "fields": {
+      "name": "Iphone 7",
+      "product_type": "phone",
+      "img": "/media/iphone7.png"
+    }
+  },
+  {
+    "model": "phones.product",
+    "pk": 2,
+    "fields": {
+      "name": "Nexus 5x",
+      "product_type": "phone",
+      "img": "/media/nexus5x.webp"
+    }
+  },
+  {
+    "model": "phones.product",
+    "pk": 3,
+    "fields": {
+      "name": "Pixel 2",
+      "product_type": "phone",
+      "img": "/media/pixel2.webp"
+    }
+  },
+  {
+    "model": "phones.product",
+    "pk": 4,
+    "fields": {
+      "name": "Samsung S8",
+      "product_type": "phone",
+      "img": "/media/samsungs8.webp"
+    }
+  }
+]

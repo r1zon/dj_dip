@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Смартфоны{% endblock %}
+
+{% block content2 %}
+
+<main role="main">
+
+  <div class="container">
+    <!-- Example row of columns -->
+
+    <h1>Смартфоны</h1>
+
+    <div class="row">
+      {% for product in products %}
+            <div class="book col-md-4">
+                <h2>{{product.name}}</h2>
+                <a href="{% url 'product_view' product.id %}"><img src={{product.img}} width="180"></a>
+                <form>
+                  <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
+                </form>
+            </div>
+      {% endfor %}
+
+
+    </div> <!-- /container -->
+    {% if products.has_other_pages %}
+      <ul class="pagination">
+        {% if products.has_previous %}
+          <li><a href="?page={{ products.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in products.paginator.page_range %}
+          {% if products.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if products.has_next %}
+          <li><a href="?page={{ products.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+  </div>
+</main>
+<hr>
+<footer class="container">
+  <p>© Просто магазин 2018</p>
+</footer>
+
+<script src="{% static "jquery-3.3.1.slim.min.js" %}"></script>
+<script src="{% static "popper.min.js" %}"></script>
+<script src="{% static "bootstrap.min.js" %}"></script>
+{% endblock content2 %}
