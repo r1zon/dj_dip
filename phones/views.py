@@ -130,7 +130,7 @@ def product_view(request, slug):
                                       name=request.POST.get('name'),
                                       text=request.POST.get('text'),
                                       rate=request.POST.get('rate'))
-        return redirect("product_view", pk)
+        return redirect("product_view", slug)
     reviews = Review.objects.all().filter(product_id=pk)
     context.update({'reviews': reviews})
     if pk in request.session['reviewed_products']:

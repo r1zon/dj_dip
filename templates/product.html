@@ -32,7 +32,7 @@
         <p>Отзыв от вас уже есть</p>
     {% else %}
         <h4>Оставте отзыв:</h4>
-        <form action="{% url 'product_view' product.id %}" method="POST">
+        <form action="{% url 'product_view' product.slug %}" method="POST">
             {% csrf_token %}
             {{ form|crispy }}
             <input type="submit" name="review" value="Отправить отзыв"/>
