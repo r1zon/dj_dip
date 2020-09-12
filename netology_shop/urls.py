@@ -14,21 +14,31 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-# from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import path, include
 
-import auth.views
+import auth1.views
 import main.views
 import phones.views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main.views.index, name = 'index'),
     path('smartphones/', phones.views.smartphones, name = 'smartphones'),
-    path('phone/<int:pk>/', phones.views.product_view, name = 'product_view'),
+    path('tablets/', phones.views.tablets, name = 'tablets'),
+    path('accessories/', phones.views.accessories, name = 'accessories'),
+    path('product/<slug:slug>/', phones.views.product_view, name = 'product_view'),
     path('empty/', phones.views.empty, name = 'empty'),
     path('cart/', main.views.cart, name = 'cart'),
-    path('login/', auth.views.CustomLoginView.as_view(), name ='login'),
-    path('logout/', auth.views.logout, name = 'logout'),
-    path('signup/', auth.views.signup),
-]
+    # path('login/', auth1.views.CustomLoginView.as_view(), name ='login'),
+    path('login/', auth1.views.login_request, name ='login'),
+    path('logout/', auth1.views.logout_request, name = 'logout'),
+    path('signup/', auth1.views.signup),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

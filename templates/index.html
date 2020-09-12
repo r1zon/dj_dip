@@ -17,8 +17,10 @@
       {% for product in products %}
             <div class="book col-md-4">
                 <h2>{{product.name}}</h2>
-                <a href="{% url 'product_view' product.id %}"><img src={{product.img}} width="180"></a>
-                <form>
+                <a href="{% url 'product_view' product.slug %}"><img src="{{product.img.url}}" width="180"></a>
+                <form method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value="{{product.id}}">
                   <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
                 </form>
             </div>

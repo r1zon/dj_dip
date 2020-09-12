@@ -5,7 +5,8 @@
     "fields": {
       "name": "Iphone 7",
       "product_type": "phone",
-      "img": "/media/iphone7.png"
+      "img": "/media/iphone7.png",
+      "slug": 1
     }
   },
   {
@@ -14,7 +15,8 @@
     "fields": {
       "name": "Nexus 5x",
       "product_type": "phone",
-      "img": "/media/nexus5x.webp"
+      "img": "/media/nexus5x.webp",
+      "slug": 1
     }
   },
   {
@@ -23,7 +25,8 @@
     "fields": {
       "name": "Pixel 2",
       "product_type": "phone",
-      "img": "/media/pixel2.webp"
+      "img": "/media/pixel2.webp",
+      "slug": 1
     }
   },
   {
@@ -32,7 +35,18 @@
     "fields": {
       "name": "Samsung S8",
       "product_type": "phone",
-      "img": "/media/samsungs8.webp"
+      "img": "/media/samsungs8.webp",
+      "slug": 1
+    }
+  },
+  {
+    "model": "phones.product",
+    "pk": 5,
+    "fields": {
+      "name": "Ipad Air",
+      "product_type": "tablet",
+      "img": "/media/ipad_air.jpg",
+      "slug": 1
     }
   }
 ]
