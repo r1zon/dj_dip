@@ -80,15 +80,15 @@ def index(request):
     products = Product.objects.all()
     articles = Article.objects.all()
     products_type = ProductType.objects.all()
-    type = request.GET.get('type')
-    sub_type = request.GET.get('subtype')
-    if type:
-        objects = Product.objects.filter(product_type__name = sub_type)
-        context = {'tittle': sub_type,
+    get_type = request.GET.get('type')
+    get_sub_type = request.GET.get('subtype')
+    if get_type:
+        objects = Product.objects.filter(product_type__name = get_sub_type)
+        context = {'tittle': get_sub_type,
                    'products_type': products_type,
-                   'types': type
+                   'get_type': get_type
                    }
-        if list(objects) == []:
+        if len(list(objects)) == 0:
             return render(
                 request,
                 'empty_section.html',
@@ -104,8 +104,8 @@ def index(request):
             except EmptyPage:
                 products = paginator.page(paginator.num_pages)
             context = {'products': products,
-                       'tittle': sub_type,
-                       'types': type,
+                       'tittle': get_sub_type,
+                       'get_type': get_type,
                        'page': page,
                        'products_type': products_type
                        }
@@ -118,7 +118,7 @@ def index(request):
     context = {'tittle': 'index',
                'products': products,
                'articles': articles,
-               'products_type': products_type
+               # 'products_type': products_type
                }
     add_to_cart(request)
     return render(

@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from main.views import add_to_cart
 from phones.forms import ReviewForm
-from phones.models import Product, Review
+from phones.models import Product, Review, ProductType
 
 
 # def smartphones(request):
@@ -105,16 +105,11 @@ from phones.models import Product, Review
 #     )
 
 def product_view(request, slug):
-    print(slug)
     product = get_object_or_404(Product, slug=slug)
     pk = product.id
     template = 'product.html'
-    if product.product_type == 'acc':
-        title = 'accessories'
-    else:
-        title = 'smartphones'
     context = {'product': product,
-               'tittle': title,
+               'get_type': ProductType.objects.filter(subproducttypes__name = product.product_type)[0].product_type,
                'form': ReviewForm()}
     add_to_cart(request)
     if 'reviewed_products' not in request.session.keys():

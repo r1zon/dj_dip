@@ -37,8 +37,8 @@
                 Главная</a>
         </li>
       {% endif %}
-      {% for type in products_type %}
-        {% if type.product_type == types %}
+      {% for type in types %}
+        {% if type.product_type == get_type %}
           <li class="nav-item active dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
