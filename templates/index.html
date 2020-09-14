@@ -30,29 +30,42 @@
 
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-4">Не знаете что одеть летом?</h1>
+        <h1 class="display-4">Не знаете что почитать? Читайте наши статьи о крутых мобилах</h1>
         <p>Вот что мы можем предложить:</p>
       </div>
     </div>
-
-
-    <div class="container mb-5">
-      <!-- Example row of columns -->
+    <div class="container mb-4">
       <div class="row">
+        {% for article in articles %}
+          <div class="col-lg-5 col-sm-6 portfolio-item">
+            <div class="card h-100">
+              <div class="card-body">
+                <h4 class="card-title">
+                  {{ article.title }}
+                </h4>
+                {% for product in article.products.all %}
+                  <a href="{% url 'product_view' product.slug %}"><img src="{{ product.img.url }}" width="180"></a>
+                {% endfor %}
+                  <p class="card-text">{{ article.text }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+<!--    <div class="container mb-4">-->
+<!--      &lt;!&ndash; Example row of columns &ndash;&gt;-->
+<!--      <div class="row">-->
 
-        <div class="col-md-4">
-          <h2>Фуфайка</h2>
-
-          <a href="./phone.html">
-
-            <img src="./static/fufajka.jpg" width="180">
-
-          </a>
-
-          <form>
-            <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
-          </form>
-        </div>
+<!--        <div class="col-md-10">-->
+<!--          {% for article in articles %}-->
+<!--                <div class="book col-md-3">-->
+<!--                    <h2 class="display-10">{{article.title}}</h2>-->
+<!--                    <img src="{{article.image.url}}" width="180">-->
+<!--                    {{article.text}}-->
+<!--                </div>-->
+<!--          {% endfor %}-->
+<!--        </div>-->
 
       </div>
     </div> <!-- /container -->

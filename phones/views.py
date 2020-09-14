@@ -6,103 +6,103 @@ from phones.forms import ReviewForm
 from phones.models import Product, Review
 
 
-def smartphones(request):
-    objects = Product.objects.filter(product_type__product_type='phone')
-    context = {'tittle': 'smartphones',
-               }
-    if list(objects) == []:
-        return render(
-            request,
-            'empty_section.html',
-            context
-        )
-    else:
-        paginator = Paginator(objects, 1)
-        page = request.GET.get('page')
-        try:
-            products = paginator.page(page)
-        except PageNotAnInteger:
-            products = paginator.page(1)
-        except EmptyPage:
-            products = paginator.page(paginator.num_pages)
-        context = {'products': products,
-                   'tittle': 'smartphones',
-                   'page': page
-                   }
-        add_to_cart(request)
-        return render(
-            request,
-            'smartphones.html',
-            context
-        )
-
-def tablets(request):
-    objects = Product.objects.filter(product_type__product_type='tablet')
-    context = {'tittle': 'smartphones',
-               }
-    if list(objects) == []:
-        return render(
-            request,
-            'empty_section.html',
-            context
-        )
-    else:
-        paginator = Paginator(objects, 1)
-        page = request.GET.get('page')
-        try:
-            products = paginator.page(page)
-        except PageNotAnInteger:
-            products = paginator.page(1)
-        except EmptyPage:
-            products = paginator.page(paginator.num_pages)
-        context = {'products': products,
-                   'tittle': 'smartphones',
-                   'page': page
-                   }
-        add_to_cart(request)
-        return render(
-            request,
-            'tablets.html',
-            context
-        )
-
-def accessories(request):
-    objects = Product.objects.filter(product_type__product_type='acc')
-    context = {'tittle': 'accessories',
-               }
-    if list(objects) == []:
-        return render(
-            request,
-            'empty_section.html',
-            context
-        )
-    else:
-        paginator = Paginator(objects, 1)
-        page = request.GET.get('page')
-        try:
-            products = paginator.page(page)
-        except PageNotAnInteger:
-            products = paginator.page(1)
-        except EmptyPage:
-            products = paginator.page(paginator.num_pages)
-        context = {'products': products,
-                   'tittle': 'accessories',
-                   'page': page
-                   }
-        add_to_cart(request)
-        return render(
-            request,
-            'accessories.html',
-            context
-        )
-
-def empty(request):
-    context = {'tittle': 'accessories'}
-    return render(
-        request,
-        'empty_section.html',
-        context
-    )
+# def smartphones(request):
+#     objects = Product.objects.filter(product_type__product_type='Смартфоны')
+#     context = {'tittle': 'smartphones',
+#                }
+#     if list(objects) == []:
+#         return render(
+#             request,
+#             'empty_section.html',
+#             context
+#         )
+#     else:
+#         paginator = Paginator(objects, 1)
+#         page = request.GET.get('page')
+#         try:
+#             products = paginator.page(page)
+#         except PageNotAnInteger:
+#             products = paginator.page(1)
+#         except EmptyPage:
+#             products = paginator.page(paginator.num_pages)
+#         context = {'products': products,
+#                    'tittle': 'smartphones',
+#                    'page': page
+#                    }
+#         add_to_cart(request)
+#         return render(
+#             request,
+#             'smartphones.html',
+#             context
+#         )
+#
+# def tablets(request):
+#     objects = Product.objects.filter(product_type__product_type='tablet')
+#     context = {'tittle': 'smartphones',
+#                }
+#     if list(objects) == []:
+#         return render(
+#             request,
+#             'empty_section.html',
+#             context
+#         )
+#     else:
+#         paginator = Paginator(objects, 1)
+#         page = request.GET.get('page')
+#         try:
+#             products = paginator.page(page)
+#         except PageNotAnInteger:
+#             products = paginator.page(1)
+#         except EmptyPage:
+#             products = paginator.page(paginator.num_pages)
+#         context = {'products': products,
+#                    'tittle': 'smartphones',
+#                    'page': page
+#                    }
+#         add_to_cart(request)
+#         return render(
+#             request,
+#             'tablets.html',
+#             context
+#         )
+#
+# def accessories(request):
+#     objects = Product.objects.filter(product_type__product_type='acc')
+#     context = {'tittle': 'accessories',
+#                }
+#     if list(objects) == []:
+#         return render(
+#             request,
+#             'empty_section.html',
+#             context
+#         )
+#     else:
+#         paginator = Paginator(objects, 1)
+#         page = request.GET.get('page')
+#         try:
+#             products = paginator.page(page)
+#         except PageNotAnInteger:
+#             products = paginator.page(1)
+#         except EmptyPage:
+#             products = paginator.page(paginator.num_pages)
+#         context = {'products': products,
+#                    'tittle': 'accessories',
+#                    'page': page
+#                    }
+#         add_to_cart(request)
+#         return render(
+#             request,
+#             'accessories.html',
+#             context
+#         )
+#
+# def empty(request):
+#     context = {'tittle': 'accessories'}
+#     return render(
+#         request,
+#         'empty_section.html',
+#         context
+#     )
 
 def product_view(request, slug):
     print(slug)

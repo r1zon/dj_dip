@@ -1,12 +1,14 @@
 from django.db import models
+from django.db.models import SET_NULL
 from django.utils.text import slugify
 
 from django.conf import settings
 
+
 class Product(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     # product_type = models.CharField(max_length=50, default='phone')
-    product_type = models.ForeignKey('ProductType', on_delete=models.CASCADE)
+    product_type = models.ForeignKey('SubProductType', on_delete=SET_NULL, null=True)
     img = models.ImageField(upload_to='products/')
     slug = models.SlugField(('slug'), unique=True, null=True, blank=True)
 
@@ -22,11 +24,33 @@ class Product(models.Model):
         ordering = ['id']
 
 
+class Article(models.Model):
+    title = models.CharField(max_length=256, verbose_name='Название')
+    text = models.TextField(verbose_name='Текст')
+    # image = models.ImageField(null=True, blank=True, verbose_name='Изображение', )
+    products = models.ManyToManyField(Product, related_name='articles')
+
+    class Meta:
+        verbose_name = 'Статья'
+        verbose_name_plural = 'Статьи'
+
+    def __str__(self):
+        return self.title
+
+
+
 class ProductType(models.Model):
     product_type = models.CharField(max_length=50, default='phone')
 
     def __str__(self):
         return self.product_type
+
+class SubProductType(models.Model):
+    name = models.CharField(max_length=50, default='phone')
+    sub_product_type = models.ForeignKey(ProductType, on_delete=SET_NULL, null=True, related_name='subproducttypes')
+
+    def __str__(self):
+        return self.name
 
 class Review(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
